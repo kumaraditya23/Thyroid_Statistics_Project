@@ -1,0 +1,340 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Courier New;}}
+{\*\generator Riched20 10.0.16299}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 setwd("H:/Desktop/Degrees/Mathematics/Multivariate_Statistics/Final_Project")\par
+orig_data = read.csv("thyroid0387data.csv", na.strings="?")\par
+colnames(orig_data)=c("Age","Sex","On_Thyroxine","Query_on_Thyroxine", "On_Antithyroid_Medication",\par
+                     "Sick", "Pregnant", "Thyroid_Surgery", "I131_Treatment", "Query_Hypothyroid",\par
+                     "Query_Hyperthyroid", "Lithium", "Goitre", "Tumor", "Hypopituary","Psych", \par
+                     "TSH_Measured","TSH","T3_Measured","T3","TT4_Measured","TT4","T4U_Measured",\par
+                    "T4U","FTI_Measured","FTI","TBG_Measured", "TBG","Referral_Source", "Extra")\par
+orig_data = orig_data[(orig_data$Age < 150), 1:29]\par
+count =0\par
+count1 = 0\par
+\par
+#1<=age<=20\par
+#21<=age<=40\par
+#41<=age<=60\par
+#61<=age<=80\par
+#81<=age<=100\par
+\par
+Age = rep(NA,length(orig_data$Age))\par
+#Age = rep(NA,length(orig_data$Age))\par
+#Age = rep(NA,length(orig_data$Age))\par
+#Age = rep(NA,length(orig_data$Age))\par
+#Age = rep(NA,length(orig_data$Age))\par
+Sex = rep(NA, length(orig_data$Age))\par
+TSH = rep(NA, length(orig_data$Age))\par
+T3 =  rep(NA, length(orig_data$Age))\par
+TT4 = rep(NA, length(orig_data$Age))\par
+T4U = rep(NA, length(orig_data$Age))\par
+FTI = rep(NA, length(orig_data$Age))\par
+\par
+age_cont = rep(NA,length(orig_data$Age))\par
+\par
+male_age = rep(NA,length(orig_data$Age))\par
+male_sex = rep(NA,length(orig_data$Age))\par
+male_TSH = rep(NA, length(orig_data$Age))\par
+male_T3 =  rep(NA, length(orig_data$Age))\par
+male_TT4 = rep(NA, length(orig_data$Age))\par
+male_T4U = rep(NA, length(orig_data$Age))\par
+male_FTI = rep(NA, length(orig_data$Age))\par
+\par
+\par
+female_age = rep(NA,length(orig_data$Age))\par
+female_sex = rep(NA,length(orig_data$Age))\par
+female_TSH = rep(NA, length(orig_data$Age))\par
+female_T3 =  rep(NA, length(orig_data$Age))\par
+female_TT4 = rep(NA, length(orig_data$Age))\par
+female_T4U = rep(NA, length(orig_data$Age))\par
+female_FTI = rep(NA, length(orig_data$Age))\par
+\par
+\par
+typeof(orig_data$On_Thyroxine[1])\par
+count_age=0\par
+for (i in 1:length(orig_data$Age))\{\par
+    \par
+  if (!is.na(orig_data$Age[i]) && !is.na(orig_data$Sex[i]) && !is.na(orig_data$On_Thyroxine[i]) && \par
+        !is.na(orig_data$On_Antithyroid_Medication[i]) && !is.na(orig_data$Sick[i]) && !is.na(orig_data$Pregnant[i]) &&\par
+        !is.na(orig_data$Thyroid_Surgery[i]) && !is.na(orig_data$I131_Treatment[i])  && !is.na(orig_data$Query_Hypothyroid) &&\par
+        !is.na(orig_data$Query_Hyperthyroid) &&\par
+         !is.na(orig_data$Lithium[i]) && !is.na(orig_data$Goitre[i]) && \par
+        !is.na(orig_data$Tumor[i]) && !is.na(orig_data$Hypopituary[i]) && !is.na(orig_data$Psych[i]) && !is.na(orig_data$TSH[i]) &&\par
+        !is.na(orig_data$T3[i]) && !is.na(orig_data$TT4[i]) && !is.na(orig_data$T4U[i]) && !is.na(orig_data$FTI[i]))\{\par
+    \par
+    #print("MATCHING DATA FOUND")\par
+    count = count + 1\par
+    \par
+\par
+  if ((as.character(orig_data$On_Thyroxine[i])== 'f') && (as.character(orig_data$On_Antithyroid_Medication[i])== 'f') &&\par
+        (as.character(orig_data$Sick[i])== 'f') && (as.character(orig_data$Pregnant[i])== 'f') && (as.character(orig_data$Thyroid_Surgery[i])== 'f') &&\par
+        (as.character(orig_data$I131_Treatment[i]) == 'f') && (as.character(orig_data$Query_Hypothyroid) == 'f') && \par
+          (as.character(orig_data$Query_Hyperthyroid) == 'f') &&\par
+        (as.character(orig_data$Lithium[i]) == 'f') && (as.character(orig_data$Goitre[i]) == 'f') && \par
+          (as.character(orig_data$Tumor[i]) == 'f') && (as.character(orig_data$Hypopituary[i]) == 'f') &&\par
+        (as.character(orig_data$Psych[i]) == 'f'))\{\par
+    count_age = count_age + 1\par
+    #print(orig_data$On_Thyroxine[i])\par
+    count1 = count1 + 1\par
+    age_cont[count_age]=orig_data$Age[i]\par
+    if (orig_data$Age[i] >= 1 && orig_data$Age[i] <=20)\{\par
+      Age[count_age] = 1\par
+      Sex[count_age] = orig_data$Sex[i]\par
+      TSH[count_age] = orig_data$TSH[i]\par
+      T3[count_age] = orig_data$T3[i]\par
+      TT4[count_age] = orig_data$TT4[i]\par
+      T4U[count_age] = orig_data$T4U[i]\par
+      FTI[count_age] = orig_data$FTI[i]\par
+      \par
+      \} else if (orig_data$Age[i] >= 21 && orig_data$Age[i] <=40)\{\par
+         Age[count_age] = 2\par
+         Sex[count_age] = orig_data$Sex[i]\par
+         TSH[count_age] = orig_data$TSH[i]\par
+         T3[count_age] = orig_data$T3[i]\par
+         TT4[count_age] = orig_data$TT4[i]\par
+         T4U[count_age] = orig_data$T4U[i]\par
+         FTI[count_age] = orig_data$FTI[i]\par
+        \par
+      \} else if (orig_data$Age[i] >= 41 && orig_data$Age[i] <=60)\{\par
+        Age[count_age] = 3\par
+        Sex[count_age] = orig_data$Sex[i]\par
+        TSH[count_age] = orig_data$TSH[i]\par
+        T3[count_age] = orig_data$T3[i]\par
+        TT4[count_age] = orig_data$TT4[i]\par
+        T4U[count_age] = orig_data$T4U[i]\par
+        FTI[count_age] = orig_data$FTI[i]\par
+        \par
+      \} else if (orig_data$Age[i] >= 61 && orig_data$Age[i] <=80)\{\par
+        Age[count_age] = 4\par
+        Sex[count_age] = orig_data$Sex[i]\par
+        TSH[count_age] = orig_data$TSH[i]\par
+        T3[count_age] = orig_data$T3[i]\par
+        TT4[count_age] = orig_data$TT4[i]\par
+        T4U[count_age] = orig_data$T4U[i]\par
+        FTI[count_age] = orig_data$FTI[i]\par
+        \par
+      \} else if (orig_data$Age[i] >= 81 && orig_data$Age[i] <=100)\{\par
+        Age[count_age] = 5\par
+        Sex[count_age] = orig_data$Sex[i]\par
+        TSH[count_age] = orig_data$TSH[i]\par
+        T3[count_age] = orig_data$T3[i]\par
+        TT4[count_age] = orig_data$TT4[i]\par
+        T4U[count_age] = orig_data$T4U[i]\par
+        FTI[count_age] = orig_data$FTI[i]\par
+        \par
+      \}   \par
+    \par
+    \}\par
+    \par
+    \par
+  \}\par
+    \par
+        \par
+\}\par
+print(count1)\par
+y = Age[(complete.cases(Age))]\par
+print(min(y))\par
+print(length(y))\par
+print(y)\par
+\par
+#MANOVA analysis\par
+model1 = manova((cbind(TSH[(complete.cases(TSH))], T3[(complete.cases(T3))], TT4[(complete.cases(TT4))], T4U[(complete.cases(T4U))],FTI[(complete.cases(FTI))])~as.factor(Age[(complete.cases(Age))])*as.factor(Sex[(complete.cases(Sex))])))\par
+summary(model1)\par
+\par
+#MANCOVA analysis\par
+model2= manova((cbind(TSH[(complete.cases(TSH))], T3[(complete.cases(T3))], TT4[(complete.cases(TT4))], T4U[(complete.cases(T4U))],FTI[(complete.cases(FTI))])~age_cont[(complete.cases(age_cont))]*as.factor(Sex[(complete.cases(Sex))])))\par
+\par
+summary(model2)\par
+\par
+data_frame_comb = data.frame(cbind(Age[(complete.cases(Age))],Sex[(complete.cases(Sex))], TSH[(complete.cases(TSH))],T3[(complete.cases(T3))], TT4[(complete.cases(TT4))], T4U[(complete.cases(T4U))], FTI[(complete.cases(FTI))]))\par
+\par
+#test = is.na(data_frame)\par
+#print(test[test==TRUE])\par
+#male_data = \par
+colnames(data_frame_comb)=c("Age", "Sex","TSH","T3","TT4","T4U","FTI")\par
+head(data_frame_comb)\par
+print(length(data_frame_comb$Sex))\par
+male_data_frame = data_frame_comb[data_frame_comb$Sex=="1",]\par
+print(length(male_data_frame$Sex))\par
+#print(length(male_data_frame$Age))\par
+\par
+female_data_frame = data_frame_comb[data_frame_comb$Sex=="2",]\par
+print(length(female_data_frame$Sex))\par
+\par
+\par
+#ANALYSIS FOR MALE DATA SET\par
+male_model = manova(cbind(male_data_frame$TSH,male_data_frame$T3, male_data_frame$TT4, male_data_frame$T4U, male_data_frame$FTI)~as.factor(male_data_frame$Age))\par
+summary(male_model)\par
+\par
+\par
+#ANALYSIS FOR FEMALE DATA SET\par
+female_model = manova(cbind(female_data_frame$TSH,female_data_frame$T3, female_data_frame$TT4, female_data_frame$T4U, female_data_frame$FTI)~as.factor(female_data_frame$Age))\par
+summary(female_model)\par
+\par
+\par
+#scatter plots for male and female\par
+pairs(male_data_frame)\par
+pairs(female_data_frame)\par
+\par
+\par
+print(mean(male_data_frame$TSH))\par
+print(mean(male_data_frame$T3))\par
+print(mean(male_data_frame$TT4))\par
+print(mean(male_data_frame$T4U))\par
+print(mean(male_data_frame$FTI))\par
+\par
+male_1 = male_data_frame[male_data_frame$Age=="1",3:7]\par
+male_2 = male_data_frame[male_data_frame$Age=="2",3:7]\par
+male_3 = male_data_frame[male_data_frame$Age=="3",3:7]\par
+male_4 = male_data_frame[male_data_frame$Age=="4",3:7]\par
+male_5 = male_data_frame[male_data_frame$Age=="5",3:7]\par
+\par
+female_1 = female_data_frame[female_data_frame$Age=="1",3:7]\par
+female_2 = female_data_frame[female_data_frame$Age=="2",3:7]\par
+female_3 = female_data_frame[female_data_frame$Age=="3",3:7]\par
+female_4 = female_data_frame[female_data_frame$Age=="4",3:7]\par
+female_5 = female_data_frame[female_data_frame$Age=="5",3:7]\par
+\par
+#LINEAR DISCRIMINANT ANALYSIS for males\par
+\par
+\par
+\par
+#covariance matrices for age groups\par
+SM1 = cov(as.matrix(male_1))\par
+SM2 = cov(as.matrix(male_2))\par
+SM3 = cov(as.matrix(male_3))\par
+SM4 = cov(as.matrix(male_4))\par
+SM5 = cov(as.matrix(male_5))\par
+\par
+#sample lengths\par
+nm1 = length(male_1$TSH)\par
+nm2 = length(male_2$TSH)\par
+nm3 = length(male_3$TSH)\par
+nm4 = length(male_4$TSH)\par
+nm5 = length(male_5$TSH)\par
+\par
+\par
+#mean vectors\par
+ym1bar = c(mean(male_1$TSH),mean(male_1$T3), mean(male_1$TT4), mean(male_1$T4U), mean(male_1$FTI))\par
+ym2bar = c(mean(male_2$TSH),mean(male_2$T3), mean(male_2$TT4), mean(male_2$T4U), mean(male_2$FTI))\par
+ym3bar = c(mean(male_3$TSH),mean(male_3$T3), mean(male_3$TT4), mean(male_3$T4U), mean(male_3$FTI))\par
+ym4bar = c(mean(male_4$TSH),mean(male_4$T3), mean(male_4$TT4), mean(male_4$T4U), mean(male_4$FTI))\par
+ym5bar = c(mean(male_5$TSH),mean(male_5$T3), mean(male_5$TT4), mean(male_5$T4U), mean(male_5$FTI))\par
+\par
+#case1: male_1 and male_4\par
+Spooledm1 = ((nm1/(nm1+nm4))*SM1)+((nm4/(nm1+nm4))*SM4)\par
+zeem1 = t(ym1bar-ym4bar)%*%solve(Spooledm1)\par
+zeem1\par
+zeem1*sqrt(diag(Spooledm1))\par
+#sqrt(diag(Spooledm1))\par
+#case2: male_1 and male_5\par
+Spooledm2 = ((nm1/(nm1+nm5))*SM1)+((nm5/(nm1+nm5))*SM5)\par
+zeem2 = t(ym1bar-ym5bar)%*%solve(Spooledm2)\par
+zeem2\par
+zeem2*sqrt(diag(Spooledm2))\par
+#case3: male_2 and male_3\par
+Spooledm3 = ((nm2/(nm2+nm3))*SM2)+((nm3/(nm2+nm3))*SM3)\par
+zeem3 = t(ym2bar-ym3bar)%*%solve(Spooledm3)\par
+zeem3\par
+zeem3*sqrt(diag(Spooledm3))\par
+#case4: male_2 and male_4\par
+Spooledm4 = ((nm2/(nm2+nm4))*SM2)+((nm4/(nm2+nm4))*SM4)\par
+zeem4 = t(ym2bar-ym4bar)%*%solve(Spooledm4)\par
+zeem4\par
+zeem4*sqrt(diag(Spooledm4))\par
+#case5: male_2 and male_5\par
+Spooledm5 = ((nm2/(nm2+nm5))*SM2)+((nm5/(nm2+nm5))*SM5)\par
+zeem5 = t(ym2bar-ym5bar)%*%solve(Spooledm5)\par
+zeem5\par
+zeem5*sqrt(diag(Spooledm5))\par
+#case6: male_3 and male_4\par
+Spooledm6 = ((nm3/(nm3+nm4))*SM3)+((nm4/(nm3+nm4))*SM4)\par
+zeem6 = t(ym3bar-ym4bar)%*%solve(Spooledm6)\par
+zeem6\par
+zeem6*sqrt(diag(Spooledm6))\par
+#case7: male_3 and male_5\par
+Spooledm7 = ((nm3/(nm3+nm5))*SM3)+((nm5/(nm3+nm5))*SM5)\par
+zeem7 = t(ym3bar-ym5bar)%*%solve(Spooledm7)\par
+zeem7\par
+zeem7*sqrt(diag(Spooledm7))\par
+#case8: male_4 and male_5\par
+Spooledm8 = ((nm4/(nm4+nm5))*SM4)+((nm5/(nm4+nm5))*SM5)\par
+zeem8 = t(ym4bar-ym5bar)%*%solve(Spooledm8)\par
+zeem8\par
+zeem8*sqrt(diag(Spooledm8))\par
+\par
+#LINEAR DISCRIMINANT ANALYSIS for females\par
+\par
+\par
+#covariance matrices for age groups\par
+SF1 = cov(scale(female_1))\par
+SF2 = cov(as.matrix(female_2))\par
+SF3 = cov(as.matrix(female_3))\par
+SF4 = cov(as.matrix(female_4))\par
+SF5 = cov(as.matrix(female_5))\par
+\par
+#sample lengths\par
+nf1 = length(female_1$TSH)\par
+nf2 = length(female_2$TSH)\par
+nf3 = length(female_3$TSH)\par
+nf4 = length(female_4$TSH)\par
+nf5 = length(female_5$TSH)\par
+\par
+\par
+#mean vectors\par
+yf1bar = c(mean(female_1$TSH),mean(female_1$T3), mean(female_1$TT4), mean(female_1$T4U), mean(female_1$FTI))\par
+yf2bar = c(mean(female_2$TSH),mean(female_2$T3), mean(female_2$TT4), mean(female_2$T4U), mean(female_2$FTI))\par
+yf3bar = c(mean(female_3$TSH),mean(female_3$T3), mean(female_3$TT4), mean(female_3$T4U), mean(female_3$FTI))\par
+yf4bar = c(mean(female_4$TSH),mean(female_4$T3), mean(female_4$TT4), mean(female_4$T4U), mean(female_4$FTI))\par
+yf5bar = c(mean(female_5$TSH),mean(female_5$T3), mean(female_5$TT4), mean(female_5$T4U), mean(female_5$FTI))\par
+\par
+#case1: female_1 and female_3\par
+Spooledf1 = ((nf1/(nf1+nf3))*SF1)+((nf3/(nf1+nf3))*SF3)\par
+zeef1 = t(yf1bar-yf3bar)%*%solve(Spooledf1)\par
+zeef1\par
+zeef1*sqrt(diag(Spooledf1))\par
+#case2: female_1 and female_4\par
+Spooledf2 = ((nf1/(nf1+nf4))*SF1)+((nf4/(nf1+nf4))*SF4)\par
+zeef2 = t(yf1bar-yf4bar)%*%solve(Spooledf2)\par
+zeef2\par
+zeef2*sqrt(diag(Spooledf2))\par
+#case3: female_1 and female_5\par
+Spooledf3 = ((nf1/(nf1+nf5))*SF1)+((nf5/(nf1+nf5))*SF5)\par
+zeef3 = t(yf1bar-yf5bar)%*%solve(Spooledf3)\par
+zeef3\par
+zeef3*sqrt(diag(Spooledf3))\par
+#case4: female_2 and female_3\par
+Spooledf4 = ((nf2/(nf2+nf3))*SF2)+((nf3/(nf2+nf3))*SF3)\par
+zeef4 = t(yf2bar-yf3bar)%*%solve(Spooledf4)\par
+zeef4\par
+zeef4*sqrt(diag(Spooledf4))\par
+#case5: female_2 and female_4\par
+Spooledf5 = ((nf2/(nf2+nf4))*SF2)+((nf4/(nf2+nf4))*SF4)\par
+zeef5 = t(yf2bar-yf4bar)%*%solve(Spooledf5)\par
+zeef5\par
+zeef5*sqrt(diag(Spooledf5))\par
+#case6: female_2 and female_5\par
+Spooledf6 = ((nf2/(nf2+nf5))*SF2)+((nf5/(nf2+nf5))*SF5)\par
+zeef6 = t(yf2bar-yf5bar)%*%solve(Spooledf6)\par
+zeef6\par
+zeef6*sqrt(diag(Spooledf6))\par
+#case7: female_3 and male_4\par
+Spooledf7 = ((nf3/(nf3+nf4))*SF3)+((nf4/(nf3+nf4))*SF4)\par
+zeef7 = t(yf3bar-yf4bar)%*%solve(Spooledf7)\par
+zeef7\par
+zeef7*sqrt(diag(Spooledf7))\par
+#case8: female_3 and female_5\par
+Spooledf8 = ((nf3/(nf3+nf5))*SF3)+((nf5/(nf3+nf5))*SF5)\par
+zeef8 = t(yf3bar-yf5bar)%*%solve(Spooledf8)\par
+zeef8\par
+zeef8*sqrt(diag(Spooledf8))\par
+#case9: female_4 and female_5\par
+Spooledf9 = ((nf4/(nf4+nf5))*SF4)+((nf5/(nf4+nf5))*SF5)\par
+zeef9 = t(yf4bar-yf5bar)%*%solve(Spooledf9)\par
+zeef9\par
+zeef9*sqrt(diag(Spooledf9))\par
+\par
+\par
+\par
+\par
+}
+ 
